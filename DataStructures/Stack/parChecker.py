@@ -38,6 +38,10 @@ def parChecker(symbolString, open_brackets, close_brackets):
         return False
 
 def matches(open, close):
+    """
+A helper method for parChecker that makes sure the open and closing
+symbols match
+    """
 
     dic = {"(":")", "{":"}", "[":"]"}
     return dic[open] == close
