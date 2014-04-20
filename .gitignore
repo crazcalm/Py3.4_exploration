@@ -1,3 +1,7 @@
 */*pyc
 */*py~
 */__pycache__/
+
+*/*/*pyc
+*/*/*py~
+*/*/__pycache__/
