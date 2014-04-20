@@ -26,7 +26,9 @@ def parChecker(symbolString, open_brackets, close_brackets):
             if s.isEmpty():
                 balanced = False
             else:
-                s.pop()
+                top = s.pop()
+                if not matches(top,symbol):
+                    balanced = False
 
         index = index + 1
 
@@ -34,6 +36,11 @@ def parChecker(symbolString, open_brackets, close_brackets):
         return True
     else:
         return False
+
+def matches(open, close):
+
+    dic = {"(":")", "{":"}", "[":"]"}
+    return dic[open] == close
 
 if __name__ == "__main__":
     tests = [("", True), ("(", False), (")", False), ("()",True),
