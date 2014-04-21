@@ -1,4 +1,4 @@
-import 'random'
+import random
 from queue import Queue
 
 """
@@ -30,7 +30,7 @@ class Printer:
         """
         if self.currentTask != None:
             return True
-        else
+        else:
             return False
 
     def startNext(self, newtask):
