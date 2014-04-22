@@ -91,4 +91,5 @@ def newPrintTask():
     else:
         return False
 
-
+if __name__ == "__main__":
+    simulation(1000000, 15)
