@@ -24,14 +24,51 @@ STICKY : The sticky option decides how the widget is expanded, if its container
             widget in the cell.
 """
 
+
+
 from tkinter import *
 
-root = Tk()
-Label(root, text="Username").grid(row=0, sticky=W)
-Label(root, text="Password").grid(row=1, sticky=W)
-Entry(root).grid(row=0, column=1, sticky=E)
-Entry(root).grid(row=1, column=1, sticky=E)
-Button(root, text="Login").grid(row=2, column=1, sticky=E)
-root.mainloop()
+def example_1():
+    root = Tk()
+    Label(root, text="Username").grid(row=0, sticky=W)
+    Label(root, text="Password").grid(row=1, sticky=W)
+    Entry(root).grid(row=0, column=1, sticky=E)
+    Entry(root).grid(row=1, column=1, sticky=E)
+    Button(root, text="Login").grid(row=2, column=1, sticky=E)
+    root.mainloop()
 
+def example_2():
+    top = Tk()
+    top.title('Find & Replace')
+    Label(top, text='Find:').grid(row=0, column=0, sticky='E')
+    Entry(top).grid(row=0, column=1,padx=2, pady=2, sticky='NW', columnspan=9)
 
+    Label(top, text='Replace:').grid(row=1, column=0, sticky='E')
+    Entry(top).grid(row=1, column=1, padx=2, pady=2, stick='NW', columnspan=9)
+
+    Button(top, text="Find").grid(row=0, column=10, sticky='EW', padx=2, pady=2)
+    Button(top, text="Find All").grid(row=1, column=10, sticky='EW', padx=2,
+                                        pady=2)
+    Button(top, text="Replace").grid(row=2, column=10, sticky='EW', padx=2,
+                                        pady=2)
+    Button(top, text="Replace All").grid(row=3, column=10, sticky='EW', padx=2,
+                                        pady=2)
+
+    Checkbutton(top, text="Match whole word only").grid(row=2, column=1,
+                                        columnspan=4, sticky="W")
+    Checkbutton(top, text="Match Case").grid(row=3, column=1,
+                                        columnspan=4, sticky="W")
+    Checkbutton(top, text="Wrap around").grid(row=4, column=1,
+                                        columnspan=4, sticky="W")
+
+    Label(top, text="Direction:").grid(row=2, column=6, sticky="W")
+    Radiobutton(top, text="Up", value=1).grid(row=3, column=6,
+                                        columnspan=6, sticky="W")
+    Radiobutton(top, text="Down", value=2).grid(row=3, column=7,
+                                        columnspan=6, sticky="E")
+
+    top.mainloop()
+
+if __name__ == "__main__":
+    #example_1()
+    example_2()
