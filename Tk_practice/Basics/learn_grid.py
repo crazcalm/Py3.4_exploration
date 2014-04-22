@@ -63,9 +63,9 @@ def example_2():
 
     Label(top, text="Direction:").grid(row=2, column=6, sticky="W")
     Radiobutton(top, text="Up", value=1).grid(row=3, column=6,
-                                        columnspan=6, sticky="W")
+                                        columnspan=2, sticky="W")
     Radiobutton(top, text="Down", value=2).grid(row=3, column=7,
-                                        columnspan=6, sticky="E")
+                                        columnspan=2, sticky="E")
 
     top.mainloop()
 
