@@ -32,8 +32,8 @@ def toStr(n, base):
     else:
         return toStr(n//base, base) + convertString[n%base]
 
-myTurtle = Turtle()
-myWin = myTurtle.getscreen()
+#myTurtle = Turtle()
+#myWin = myTurtle.getscreen()
 
 def drawSpiral(myTurtle, lineLen):
     if lineLen > 0:
@@ -42,8 +42,25 @@ def drawSpiral(myTurtle, lineLen):
         myTurtle.right(90)
         drawSpiral(myTurtle, lineLen - 5)
 
+def tree(branchLen, t):
+    if branchLen > 5:
+        time.sleep(0.2)
+        t.forward(branchLen)
+        t.right(20)
+        tree(branchLen - 15, t)
+        t.left(40)
+        tree(branchLen - 10, t)
+        t.right(20)
+        t.backward(branchLen)
+
+
+
 if __name__ == "__main__":
     myTurtle = Turtle()
     myWin = myTurtle.getscreen()
-    drawSpiral(myTurtle, 100)
+    #drawSpiral(myTurtle, 100)
+    tree(80, myTurtle)
     myWin.exitonclick()
+
+
+
