@@ -46,25 +46,25 @@ def example_2():
     Label(top, text='Replace:').grid(row=1, column=0, sticky='E')
     Entry(top).grid(row=1, column=1, padx=2, pady=2, stick='NW', columnspan=9)
 
-    Button(top, text="Find").grid(row=0, column=10, sticky='EW', padx=2, pady=2)
-    Button(top, text="Find All").grid(row=1, column=10, sticky='EW', padx=2,
+    Button(top, text="Find").grid(row=0, column=11, sticky='EW', padx=2, pady=2)
+    Button(top, text="Find All").grid(row=1, column=11, sticky='EW', padx=2,
                                         pady=2)
-    Button(top, text="Replace").grid(row=2, column=10, sticky='EW', padx=2,
+    Button(top, text="Replace").grid(row=2, column=11, sticky='EW', padx=2,
                                         pady=2)
-    Button(top, text="Replace All").grid(row=3, column=10, sticky='EW', padx=2,
+    Button(top, text="Replace All").grid(row=3, column=11, sticky='EW', padx=2,
                                         pady=2)
 
     Checkbutton(top, text="Match whole word only").grid(row=2, column=1,
-                                        columnspan=4, sticky="W")
+                                        columnspan=3, sticky="W")
     Checkbutton(top, text="Match Case").grid(row=3, column=1,
-                                        columnspan=4, sticky="W")
+                                        columnspan=3, sticky="W")
     Checkbutton(top, text="Wrap around").grid(row=4, column=1,
-                                        columnspan=4, sticky="W")
+                                        columnspan=3, sticky="W")
 
-    Label(top, text="Direction:").grid(row=2, column=6, sticky="W")
-    Radiobutton(top, text="Up", value=1).grid(row=3, column=6,
+    Label(top, text="Direction:").grid(row=2, column=4, sticky="W")
+    Radiobutton(top, text="Up", value=1).grid(row=3, column=4,
                                         columnspan=2, sticky="W")
-    Radiobutton(top, text="Down", value=2).grid(row=3, column=7,
+    Radiobutton(top, text="Down", value=2).grid(row=3, column=5,
                                         columnspan=2, sticky="E")
 
     top.mainloop()
