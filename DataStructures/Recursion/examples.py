@@ -15,6 +15,9 @@ The Three Laws of Recursion:
 3. A recursive algorithm must call itself, recursively.
 """
 
+from turtle import *
+import time
+
 def listsum(numList):
     if len(numList) == 1:
         return numList[0]
@@ -28,3 +31,19 @@ def toStr(n, base):
         return convertString[n]
     else:
         return toStr(n//base, base) + convertString[n%base]
+
+myTurtle = Turtle()
+myWin = myTurtle.getscreen()
+
+def drawSpiral(myTurtle, lineLen):
+    if lineLen > 0:
+        time.sleep(0.2)
+        myTurtle.forward(lineLen)
+        myTurtle.right(90)
+        drawSpiral(myTurtle, lineLen - 5)
+
+if __name__ == "__main__":
+    myTurtle = Turtle()
+    myWin = myTurtle.getscreen()
+    drawSpiral(myTurtle, 100)
+    myWin.exitonclick()
