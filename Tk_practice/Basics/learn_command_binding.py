@@ -65,6 +65,7 @@ from tkinter import *
 root = Tk()
 Label(root, text="Click at different\nlocations in the frame below").pack()
 def mycallback(event):
+    # Prints event's attributes (all of them)
     print (dir(event))
     print ("You clicked at", event.x, event.y)
 
