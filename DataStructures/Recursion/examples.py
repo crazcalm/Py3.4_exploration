@@ -53,14 +53,22 @@ def tree(branchLen, t):
         t.right(20)
         t.backward(branchLen)
 
+def moveTower(height, fromPole, toPole, withPole):
+    if height >= 1:
+        moveTower(height-1, fromPole, withPole, toPole)
+        moveDisk(fromPole, toPole)
+        moveTower(height-1, withPole,toPole,fromPole)
 
+def moveDisk(fp, tp):
+    print("moving disk from %s to %s\n" % (fp, tp))
 
 if __name__ == "__main__":
-    myTurtle = Turtle()
-    myWin = myTurtle.getscreen()
+    #myTurtle = Turtle()
+    #myWin = myTurtle.getscreen()
     #drawSpiral(myTurtle, 100)
-    tree(80, myTurtle)
-    myWin.exitonclick()
+    #tree(80, myTurtle)
+    #myWin.exitonclick()
+    moveTower(3,"fromPole", "toPole", "withPole")
 
 
 
