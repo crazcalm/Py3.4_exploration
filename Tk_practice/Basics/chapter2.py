@@ -86,20 +86,22 @@ tag.first   : The first character in the text that has been tagged with a given 
 tag.last    : The last character in the text that has been tagged with a given tag.
 window.name : The position of the embedded window whose name is widowname.
 imagename   : The position of the embedded image whose name is imageName.
-INSERT      : The posistion o
-CURRENT     :
-
+INSERT      : The posistion of the insertion cursor.
+CURRENT     : The position of the character closet to the mouse pointer.
 
 selection   : This corresponds to the current selection. The constants SEL_FIRST,
 (SEL_FIRST, : and SEL_LAST refer to the start position and the end position in the
 SEL_LAST)   : selection. Tkinter raises a TclError exception if there is no selection
 
 
+Note:
+-----
 
+Indexes are often used as arguments for other functions.
 
-
-
-
+EX:
+---
+    text.delete(1.0, END): This means that you can delete from line 1, column 0 up till the end.
 """
 
 if __name__ == "__main__":
