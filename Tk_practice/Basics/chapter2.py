@@ -104,33 +104,36 @@ EX:
     text.delete(1.0, END): This means that you can delete from line 1, column 0 up till the end.
 """
 
+"""
+                Tkinter four types of windows:
+                ------------------------------
+
+Main Toplevel window :
+----------------------
+
+These are the ones that we have contructed so far.
+
+
+Child Toplevel window :
+-----------------------
+
+These are the ones that are independent of the root. The child Toplevel behaves
+independently of its root but it gets destroyed if its parent is destroyed.
+
+
+Transient TopLevel window:
+--------------------------
+
+This always appears on top of its parent. This wondow is hidden if the parent
+is minimized and it is destroyed of the parent is destroyed.
+
+
+Undecorated TopLevel window:
+----------------------------
+
+A Toplevel window is undecorated if it does not have a window manager.
+An undecorated window cannot be resized or moved.
+"""
+
 if __name__ == "__main__":
     scrollBar()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
