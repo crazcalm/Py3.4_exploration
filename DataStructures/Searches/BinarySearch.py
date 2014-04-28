@@ -23,4 +23,27 @@ or n/(2^i), where i is the number of comparisions. Solving for i gives use
 the above big O.
 """
 
+def binarySearch1(alist, item):
+    """
+    A binary search that was written using a while loop
+    """
+    first = 0
+    last = len(alist) -1
+    found = False
 
+    while first<= last and not found:
+        midpoint = (first + last)//2
+
+        if alist[midpoint] == item:
+            found = True
+        else:
+            if item < alist[midpoint]:
+                last = midpoint - 1
+            else:
+                first = midpoint + 1
+
+    return found
+
+if __name__=="__main__":
+    stack = list(range(100))
+    print(binarySearch1(stack, 78))
