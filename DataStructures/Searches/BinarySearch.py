@@ -44,6 +44,28 @@ def binarySearch1(alist, item):
 
     return found
 
+
+def binarySearch2(alist, item):
+    """
+    A recursive version of a binary search
+    """
+    if len(alist) == 0:
+        return False
+
+    else:
+        midpoint = len(alist)//2
+        if alist[midpoint] == item:
+            return True
+
+        else:
+            if item < alist[midpoint]:
+                return binarySearch2(alist[:midpoint], item)
+
+            else:
+                return binarySearch2(alist[midpoint + 1:], item)
+
+
 if __name__=="__main__":
     stack = list(range(100))
     print(binarySearch1(stack, 78))
+    print(binarySearch2(stack, 78))
