@@ -21,6 +21,11 @@ n-1 items left to sort, meaning that there will be n-2 pairs.
 
 Since each pass places the next largest value in place, the total number of
 passes necessary will be n-1
+
+Big O:
+------
+
+O(n^2)
 """
 import pprint
 import random
