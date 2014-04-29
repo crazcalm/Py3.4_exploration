@@ -48,8 +48,25 @@ def bubbleSort(alist):
                 alist[i+1] = tempt
     return alist
 
+def shortBubbleSort(alist):
+    """
+    A version of a bubble sort that stops when exchanges cease to be made.
+    """
+    exchanges = True
+    passnum = len(alist)-1
+    while passnum > 0 and exchanges:
+        exchanges = False
+        for i in range(passnum):
+            if alist[i] > alist[i+1]:
+                exchanges = True
+                tempt = alist[i]
+                alist[i] = alist[i+1]
+                alist[i+1] = alist[i]
+    return alist
+
 
 if __name__ == "__main__":
     test = randomList(20)
     print(test)
     print(bubbleSort(test))
+    print(shortBubbleSort(test))
