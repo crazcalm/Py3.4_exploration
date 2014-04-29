@@ -29,6 +29,9 @@ O(n^2)
 from BubbleSort import randomList
 
 def insertionSort(alist):
+    """
+    A basic insertion sort
+    """
     for index in range(1, len(alist)):
 
         currentvalue = alist[index]
