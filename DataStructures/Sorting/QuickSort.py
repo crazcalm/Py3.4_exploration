@@ -58,6 +58,40 @@ value.
 
 5. The list can now be divided at the split point and the quick sort can be
 invoked recursively on the two halves.
+
+Big O:
+------
+
+If the split occurs in the middle of the list, then O(nlogn).
+
+Else, O(n^2)
 """
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
