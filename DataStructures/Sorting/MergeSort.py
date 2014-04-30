@@ -15,6 +15,15 @@ a merge sort on both halves.
     Once the two halves are sorted, the fundamental operation, called a 'merge,'
 is performed. Merging is the process of taking two smaller sorted lists and
 combining them together into a single, sorted, new list.
+
+Big O:
+------
+
+1. A merge sort is an O(nlogn)
+
+2. Recall that the slicing operator is O(k) where k is the size of the slice.
+In order to guarantee that merge sort will be O(nlogn) we will need to remove
+the slice operator.
 """
 from BubbleSort import randomList
 
