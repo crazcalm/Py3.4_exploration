@@ -118,10 +118,16 @@ def postorder(tree):
         print(tree.getRootVal())
 
 def inorder(tree):
+
     if tree != None:
-        inorder(tree.getLeftChild())
+
+        if tree.leftChild:
+            inorder(tree.getLeftChild())
+
         print(tree.getRootVal())
-        inorder(tree.getRightChild())
+
+        if tree.rightChild:
+            inorder(tree.getRightChild())
 
 def postordereval(tree):
     opers = {'+': operator.add, '-': operator.sub,
@@ -167,8 +173,8 @@ if __name__ == "__main__":
     l.insertRight(5)
     x.insertRight(7)
 
-    preorder(x)
-    postorder(x)
+    #preorder(x)
+    #postorder(x)
     inorder(x)
 
     print(evaluate(x))
