@@ -13,6 +13,7 @@ Needs to demo:
 from EquationGenerator import main
 from testing import main2
 def demo():
+
     main2(main())
 
 if __name__ == "__main__":

@@ -40,7 +40,7 @@ def convertToBinaryTree(equation):
 
         if char == "(":
             eStack.push(BinaryTree(''))
-            print("A Binary Tree was created!\n\n")
+            #print("A Binary Tree was created!\n\n")
 
         if char in '0123456789':
             tree = eStack.pop()
@@ -48,9 +48,9 @@ def convertToBinaryTree(equation):
             if tree:
                 if tree.leftChild:
                     tree.rightChild = BinaryTree(int(char))
-                    print("A", char," was added to the leftChild\n\n")
+                    #print("A", char," was added to the leftChild\n\n")
                 else:
-                    print("A", char, "was added to the rightChild\n\n")
+                    #print("A", char, "was added to the rightChild\n\n")
                     tree.leftChild = BinaryTree(int(char))
 
             eStack.push(tree)
@@ -60,7 +60,7 @@ def convertToBinaryTree(equation):
 
             if tree.getRootVal() == "":
                 tree.setRootVal(char)
-                print("Set the root to", char,"\n\n")
+                #print("Set the root to", char,"\n\n")
 
             eStack.push(tree)
 
