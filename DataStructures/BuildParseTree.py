@@ -165,6 +165,12 @@ def printexp(tree):
             sVal = sVal + printexp(tree.getRightChild())
     return sVal
 
+def main2(x):
+    print(evaluate(x))
+    print(printexp(x))
+    print(postordereval(x))
+
+
 if __name__ == "__main__":
     x = BinaryTree('*')
     x.insertLeft('+')

@@ -100,12 +100,14 @@ def main():
         test = randomNumbersQueue(num)
         test_str = equationGenerator(test)
         test_str = "(" + test_str + ")"
+        print("Equation: ", test_str, "\n\n")
         return (balanceParentheses(test_str))
 
     else:
         test2 = randomNumbersQueue(num)
         test2_str = equationGenerator(test2)
         test2 = balanceParentheses(test2_str)
+        print("Equation: ", test2, "\n\n")
         return (test2)
 
 if __name__ == "__main__":

@@ -80,6 +80,14 @@ def convertToBinaryTree(equation):
 
                 eStack.push(parentTree)
 
+def main2(equation):
+
+    test = convertToBinaryTree(equation)
+    #print(test)
+    #inorder(test)
+    print(printexp(test))
+    print(evaluate(test))
+
 if __name__ == "__main__":
     equation = "((5+2)*7)"
 
