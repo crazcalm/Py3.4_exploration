@@ -50,4 +50,6 @@ if __name__ == "__main__":
     tests = [("", True), ("(", False), (")", False), ("()",True),
                  ("(())",True), ("(11(1)111)", True)]
     for test in tests:
+        print(test)
+        print(parChecker(test[0],"(",")"))
         assert parChecker(test[0],"(",")") == test[1], "Check test cases!"
