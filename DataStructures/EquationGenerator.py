@@ -22,8 +22,6 @@ def parChecker(symbolString, open_brackets, close_brackets):
     balanced = True
     index = 0
 
-    print(symbolString)
-
     while index < len(symbolString) and balanced:
         symbol = symbolString[index]
 
@@ -83,23 +81,33 @@ def equationGenerator(numList):
 
 def balanceParentheses(equation):
     if parChecker(equation,"(",")"):
-        print(equation)
+        #print(equation)
         return equation
     else:
         equation = "(" + equation
-        print(equation)
-        return parChecker(equation,"(",")")
+        #print(equation)
+        if parChecker(equation,"(",")"):
+            return equation
+        else:
+            balanceParentheses(equation)
+
+def main():
+    num = int(input("\n\nEnter the number of digits that you want in the equation: "))
+
+    print("\n\n")
+
+    if num % 2 == 0:
+        test = randomNumbersQueue(num)
+        test_str = equationGenerator(test)
+        test_str = "(" + test_str + ")"
+        return (balanceParentheses(test_str))
+
+    else:
+        test2 = randomNumbersQueue(num)
+        test2_str = equationGenerator(test2)
+        test2 = balanceParentheses(test2_str)
+        return (test2)
 
 if __name__ == "__main__":
-    print("\nTest1\n\n")
-    test = randomNumbersQueue(4)
-    #print(test)
-    test_str = equationGenerator(test)
-    test_str = "(" + test_str + ")"
-    print(test_str)
-    print(balanceParentheses(test_str))
-
-    print("\n\nTest 2\n\n")
-    test2 = randomNumbersQueue(5)
-    test2_str = equationGenerator(test2)
-    print(balanceParentheses(test2_str))
+    print(main())
+    print("\n\n")
