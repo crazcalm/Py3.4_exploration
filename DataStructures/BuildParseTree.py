@@ -17,7 +17,7 @@ In particular we will look at:
 
 1. How to build a parse tree from a fully parathesized mathematical expression.
 
-2. How to evalute the expression stored in a parsed tree.
+2. How to evaluate the expression stored in a parsed tree.
 
 3. How to recover the original mathematical expression from a parse tree.
 
@@ -59,6 +59,7 @@ Rules:
 """
 from Stack.stack import Stack
 from Trees.NodesAndReferences import BinaryTree
+import operator
 
 def buildParseTree(fpexp):
     fplist = fpexp.split()
@@ -91,7 +92,7 @@ def buildParseTree(fpexp):
 
     return eTree
 
-def evalute(parseTree):
+def evaluate(parseTree):
     opers = {'+': operator.add, '-': operator.sub,
              '*': operator.mul, '/': operator.truediv}
 
@@ -100,14 +101,77 @@ def evalute(parseTree):
 
     if leftC and rightC:
         fn = opers[parseTree.getRootVal()]
-        return fn(evaluate(leftC), evalute(rightC))
+        return fn(evaluate(leftC), evaluate(rightC))
     else:
         return parseTree.getRootVal()
 
-def preoder(tree):
+def preorder(tree):
     if tree:
         print(tree.getRootVal())
-        preoder(tree.getLeftChild())
-        preoder(tree.getRightChild())
+        preorder(tree.getLeftChild())
+        preorder(tree.getRightChild())
+
+def postorder(tree):
+    if tree != None:
+        postorder(tree.getLeftChild())
+        postorder(tree.getRightChild())
+        print(tree.getRootVal())
+
+def inorder(tree):
+    if tree != None:
+        inorder(tree.getLeftChild())
+        print(tree.getRootVal())
+        inorder(tree.getRightChild())
+
+def postordereval(tree):
+    opers = {'+': operator.add, '-': operator.sub,
+             '*': operator.mul, '/': operator.truediv}
+
+    res1 = None
+    res2 = None
+
+    if tree:
+        res1 = postordereval(tree.getLeftChild())
+        res2 = postordereval(tree.getRightChild())
 
 
+
+        if res1 and res2:
+            print(opers[tree.getRootVal()](res1, res2))
+            return opers[tree.getRootVal()](res1, res2)
+        else:
+            #print(tree.getRootVal())
+            return tree.getRootVal()
+
+def printexp(tree):
+    sVal = ""
+    if tree:
+        if tree.leftChild:
+            sVal = "(" + printexp(tree.getLeftChild())
+        else:
+            sVal = printexp(tree.getLeftChild())
+
+        sVal = sVal + str(tree.getRootVal())
+
+        if tree.rightChild:
+            sVal = sVal + printexp(tree.getRightChild()) +")"
+        else:
+            sVal = sVal + printexp(tree.getRightChild())
+    return sVal
+
+if __name__ == "__main__":
+    x = BinaryTree('*')
+    x.insertLeft('+')
+    l = x.getLeftChild()
+    l.insertLeft(4)
+    l.insertRight(5)
+    x.insertRight(7)
+
+    preorder(x)
+    postorder(x)
+    inorder(x)
+
+    print(evaluate(x))
+
+    print(printexp(x))
+    print(postordereval(x))
