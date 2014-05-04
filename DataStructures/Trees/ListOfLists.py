@@ -115,7 +115,7 @@ if __name__ == "__main__":
 
     print("\nInserting a left subtree in l",insertLeft(l, 11))
 
-    print("\nPrintingout the whole tree\n", r)
+    print("\nPrinting out the whole tree\n", r)
 
     print("\nGetting the right child of Root", getRightChild(r))
 

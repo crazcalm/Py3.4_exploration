@@ -90,3 +90,24 @@ def buildParseTree(fpexp):
             raise ValueError('Unknown Operator: ' + i)
 
     return eTree
+
+def evalute(parseTree):
+    opers = {'+': operator.add, '-': operator.sub,
+             '*': operator.mul, '/': operator.truediv}
+
+    leftC = parseTree.getLeftChild()
+    rightC = parseTree.getRightChild()
+
+    if leftC and rightC:
+        fn = opers[parseTree.getRootVal()]
+        return fn(evaluate(leftC), evalute(rightC))
+    else:
+        return parseTree.getRootVal()
+
+def preoder(tree):
+    if tree:
+        print(tree.getRootVal())
+        preoder(tree.getLeftChild())
+        preoder(tree.getRightChild())
+
+

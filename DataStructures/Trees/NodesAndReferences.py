@@ -71,6 +71,13 @@ class BinaryTree:
         """
         return self.key
 
+    def preoder(self):
+        print(self.key)
+        if self.leftChild:
+            self.leftChild.preoder()
+        if self.rightChild:
+            self.rightChild.preoder()
+
 if __name__=="__main__":
 
     print("Binary Tree:\n")
@@ -89,3 +96,6 @@ if __name__=="__main__":
     print("\nGetting the value of Root's right child\n", r.getRightChild().getRootVal())
 
     print("\nSetting the value of Root's right Child\n", r.getRightChild().setRootVal('hello'))
+
+    print("The external preorder is better, but I want to check that this works\n", r.preoder())
+
