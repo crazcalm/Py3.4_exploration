@@ -44,7 +44,7 @@ def infixToPostfix(infixexpr):
     tokenList = infixexpr.split()
 
     for token in tokenList:
-        if token in string.ascii_uppercase:
+        if token in string.ascii_uppercase or token in string.digits:
             postfixList.append(token)
         elif token == "(":
             opStack.push(token)
@@ -68,3 +68,6 @@ if __name__ == "__main__":
     print(infixToPostfix("( A + B ) * ( C + D )"))
     print(infixToPostfix("( A + B ) * C"))
     print(infixToPostfix("A + B * C"))
+    print(infixToPostfix("( ( 9 + 5 ) - ( 8 - 6 ) * ( 5 - 1 ) )"))
+    print(infixToPostfix("( ( 3 + 4 ) / ( 3 * 1 ) / ( 8 + 3 ) + 7 )"))
+
