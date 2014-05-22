@@ -61,7 +61,7 @@ def randomNumbersQueue(limit):
     nQueue = Queue()
 
     for x in range(limit):
-        num = random.randint(0,10)
+        num = random.randint(1,10)
         nQueue.enqueue(str(num))
 
     return nQueue
