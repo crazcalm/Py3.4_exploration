@@ -62,7 +62,7 @@ def infixToPostfix(infixexpr):
     while not opStack.isEmpty():
         postfixList.append(opStack.pop())
 
-    return " ".join(postfixList)
+    return "".join(postfixList)
 
 if __name__ == "__main__":
     print(infixToPostfix("( A + B ) * ( C + D )"))
