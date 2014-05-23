@@ -49,29 +49,18 @@ def recursiveHelper(tokens, stack):
 
     operators = "+-*/"
 
-    print("recusive loop?")
-    print("Tokens: ", tokens, "\n")
-
     for index, token in enumerate(tokens):
-
-        print("current token: ", token)
-
 
         if len(tokens) >= 3:
 
             # case 2
             if token in operators and tokens[index -1] in string.digits \
                                 and tokens[index - 2] in string.digits:
-                print("1 operator and 2 operands\n\n")
-
-
-                print("Tokens:", tokens)
-                print("Items: ", tokens[index], tokens[index-1], tokens[index-2])
 
                 # Making the tree
                 tree = BinaryTree(token)
-                tree.rightChild = BinaryTree(tokens[index - 1])
-                tree.leftChild = BinaryTree(tokens[index - 2])
+                tree.rightChild = BinaryTree(int(tokens[index - 1]))
+                tree.leftChild = BinaryTree(int(tokens[index - 2]))
 
                 # debugging
                 print(printexp(tree))
@@ -83,18 +72,15 @@ def recursiveHelper(tokens, stack):
                 tokens.pop(index)
                 tokens.pop(index - 1)
                 tokens.pop(index - 2)
-                print("Aftering pop: ", tokens)
 
                 return recursiveHelper(tokens, stack)
 
             elif token in operators and tokens[index-1] in string.digits:
-                #case 3?
-                print("Should be the operand and operator case")
-
+                #case 3
 
                 # maiking the tree
                 tree = BinaryTree(token)
-                tree.rightChild = BinaryTree(tokens[index -1])
+                tree.rightChild = BinaryTree(int(tokens[index -1]))
                 subtree = stack.pop()
                 tree.leftChild = subtree
 
@@ -104,10 +90,7 @@ def recursiveHelper(tokens, stack):
                 # put tree in stack
                 stack.push(tree)
 
-
                 # remove items from the list
-                print("Tokens: ", tokens)
-                print("Items: ", tokens[index], tokens[index-1])
                 tokens.pop(index)
                 tokens.pop(index -1)
 
@@ -120,7 +103,7 @@ def recursiveHelper(tokens, stack):
 
                 # maiking the tree
                 tree = BinaryTree(token)
-                tree.rightChild = BinaryTree(tokens[index -1])
+                tree.rightChild = BinaryTree(int(tokens[index -1]))
                 subtree = stack.pop()
                 tree.leftChild = subtree
 
@@ -130,10 +113,7 @@ def recursiveHelper(tokens, stack):
                 # put tree in stack
                 stack.push(tree)
 
-
                 #remove items from the list
-                print("Tokens:", tokens)
-                print("Items: ", tokens[index], tokens[index-1])
                 tokens.pop(index)
                 tokens.pop(index -1)
 
@@ -155,17 +135,13 @@ def recursiveHelper(tokens, stack):
             stack.push(tree)
 
             #remove from list
-            print("Tokens:", tokens)
-            print("Items: ", tokens[index])
             tokens.pop(index)
 
             return recursiveHelper(tokens, stack)
 
     print("done?")
     print(stack.size())
-    while stack.isEmpty() == False:
-        inorder(stack.pop())
-        print("\n\n")
+    return stack.pop()
 
 
 def convertToBinaryTree(postfix):
@@ -183,8 +159,8 @@ def convertToBinaryTree(postfix):
     # will fold trees
     stack = Stack()
 
-    recursiveHelper(tokens, stack)
-    return "done?????"
+    return recursiveHelper(tokens, stack)
+
 
 if __name__ == "__main__":
 
@@ -197,5 +173,7 @@ if __name__ == "__main__":
         print(test)
         test1 = infixToPostfix(test)
         print(test1)
-        print(convertToBinaryTree(test1))
+        test2 = convertToBinaryTree(test1)
+        print(test2)
+        print(evaluate(test2))
 
