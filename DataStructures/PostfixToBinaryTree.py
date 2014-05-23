@@ -68,8 +68,8 @@ def recursiveHelper(tokens, stack):
 
                 # Making the tree
                 tree = BinaryTree(token)
-                tree.leftChild = BinaryTree(tokens[index - 1])
-                tree.rightChild = BinaryTree(tokens[index - 2])
+                tree.rightChild = BinaryTree(tokens[index - 1])
+                tree.leftChild = BinaryTree(tokens[index - 2])
 
                 # debugging
                 print(printexp(tree))
@@ -85,16 +85,16 @@ def recursiveHelper(tokens, stack):
 
                 return recursiveHelper(tokens, stack)
 
-            elif token in operators:
+            elif token in operators and tokens[index-1] in string.digits:
                 #case 3?
                 print("Should be the operand and operator case")
 
 
                 # maiking the tree
                 tree = BinaryTree(token)
-                tree.leftChild = BinaryTree(tokens[index -1])
+                tree.rightChild = BinaryTree(tokens[index -1])
                 subtree = stack.pop()
-                tree.rightChild = subtree
+                tree.leftChild = subtree
 
                 # debugging
                 print(printexp(tree))
@@ -118,9 +118,9 @@ def recursiveHelper(tokens, stack):
 
                 # maiking the tree
                 tree = BinaryTree(token)
-                tree.leftChild = BinaryTree(tokens[index -1])
+                tree.rightChild = BinaryTree(tokens[index -1])
                 subtree = stack.pop()
-                tree.rightChild = subtree
+                tree.leftChild = subtree
 
                 # debugging
                 print(printexp(tree))
@@ -143,8 +143,8 @@ def recursiveHelper(tokens, stack):
             tree = BinaryTree(token)
             subtree1 = stack.pop()
             subtree2 = stack.pop()
-            tree.leftChild = subtree1
-            tree.rightChild = subtree2
+            tree.rightChild = subtree1
+            tree.leftChild = subtree2
 
             # debugging
             print(printexp(tree))
