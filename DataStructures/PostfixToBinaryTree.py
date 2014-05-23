@@ -62,10 +62,22 @@ def recursiveHelper(tokens, stack):
                                 and tokens[index - 2] in string.digits:
                 print("1 operator and 2 operands\n\n")
 
-                # removes items from the list
 
                 print("Tokens:", tokens)
                 print("Items: ", tokens[index], tokens[index-1], tokens[index-2])
+
+                # Making the tree
+                tree = BinaryTree(token)
+                tree.leftChild = BinaryTree(tokens[index - 1])
+                tree.rightChild = BinaryTree(tokens[index - 2])
+
+                # debugging
+                print(printexp(tree))
+
+                # Put tree in stack
+                stack.push(tree)
+
+                # removes items from the list
                 tokens.pop(index)
                 tokens.pop(index - 1)
                 tokens.pop(index - 2)
@@ -77,8 +89,21 @@ def recursiveHelper(tokens, stack):
                 #case 3?
                 print("Should be the operand and operator case")
 
-                # remove items from the list
 
+                # maiking the tree
+                tree = BinaryTree(token)
+                tree.leftChild = BinaryTree(tokens[index -1])
+                subtree = stack.pop()
+                tree.rightChild = subtree
+
+                # debugging
+                print(printexp(tree))
+
+                # put tree in stack
+                stack.push(tree)
+
+
+                # remove items from the list
                 print("Tokens: ", tokens)
                 print("Items: ", tokens[index], tokens[index-1])
                 tokens.pop(index)
@@ -90,6 +115,20 @@ def recursiveHelper(tokens, stack):
 
             #case 4
             if token in operators and tokens[index - 1] in string.digits:
+
+                # maiking the tree
+                tree = BinaryTree(token)
+                tree.leftChild = BinaryTree(tokens[index -1])
+                subtree = stack.pop()
+                tree.rightChild = subtree
+
+                # debugging
+                print(printexp(tree))
+
+                # put tree in stack
+                stack.push(tree)
+
+
                 #remove items from the list
                 print("Tokens:", tokens)
                 print("Items: ", tokens[index], tokens[index-1])
@@ -100,7 +139,18 @@ def recursiveHelper(tokens, stack):
 
         if token in operators:
             # case 1
-            # add logic later
+            #making tree
+            tree = BinaryTree(token)
+            subtree1 = stack.pop()
+            subtree2 = stack.pop()
+            tree.leftChild = subtree1
+            tree.rightChild = subtree2
+
+            # debugging
+            print(printexp(tree))
+
+            # put tree in stack
+            stack.push(tree)
 
             #remove from list
             print("Tokens:", tokens)
@@ -110,6 +160,11 @@ def recursiveHelper(tokens, stack):
             return recursiveHelper(tokens, stack)
 
     print("done?")
+    print(stack.size())
+    while stack.isEmpty() == False:
+        inorder(stack.pop())
+        print("\n\n")
+
 
 def convertToBinaryTree(postfix):
     """
