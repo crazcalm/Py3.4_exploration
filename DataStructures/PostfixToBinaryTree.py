@@ -40,6 +40,8 @@ Given that there are three or more tokens:
 from Stack.stack import Stack
 from Trees.NodesAndReferences import BinaryTree
 from BuildParseTree import printexp, inorder, evaluate
+from InfixToPostfix import infixToPostfix
+import EquationGenerator
 import string
 
 
@@ -172,7 +174,7 @@ def convertToBinaryTree(postfix):
     """
 
     # Puts all the tokens in a list
-    tokens = postfix.split(" ")
+    tokens = list(postfix)
     print("tokens: ", tokens, "\n")
 
     operators = "+-*/"
@@ -186,7 +188,14 @@ def convertToBinaryTree(postfix):
 
 if __name__ == "__main__":
 
-    equations = ["9 5 + 8 6 - 5 1 - * -", "3 4 + 3 1 * / 8 3 + / 7 +"]
+    equations = ["95+86-51-*-", "34+31*/83+/7+"]
     for equation in equations:
         print(convertToBinaryTree(equation))
+
+    for x in range(3):
+        test = EquationGenerator.main()
+        print(test)
+        test1 = infixToPostfix(test)
+        print(test1)
+        print(convertToBinaryTree(test1))
 

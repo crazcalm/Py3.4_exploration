@@ -27,7 +27,7 @@ is preserved since the * appears immediately after the B and C, denoting that
 
 """
 
-from stack import Stack
+from Stack.stack import Stack
 import string
 
 def infixToPostfix(infixexpr):
@@ -41,7 +41,7 @@ def infixToPostfix(infixexpr):
     opStack = Stack()
     postfixList = []
 
-    tokenList = infixexpr.split()
+    tokenList = list(infixexpr)
 
     for token in tokenList:
         if token in string.ascii_uppercase or token in string.digits:
@@ -62,7 +62,7 @@ def infixToPostfix(infixexpr):
     while not opStack.isEmpty():
         postfixList.append(opStack.pop())
 
-    return " ".join(postfixList)
+    return "".join(postfixList)
 
 if __name__ == "__main__":
     print(infixToPostfix("( A + B ) * ( C + D )"))
