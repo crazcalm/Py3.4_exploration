@@ -83,3 +83,18 @@ method defined in the BinarySearch tree class that takes the root as a parameter
   In the case where the tree is empty or we want to delete the key at the root
 of the tree, we must take special action.
 """
+
+class BinarySearchTree:
+
+    def __init_(self):
+        self.root = None
+        self.size = 0
+
+    def length(self):
+        return self.size
+
+    def __len__(self):
+        return self.size
+
+    def __iter__(self):
+        return self.root.__inter__()
