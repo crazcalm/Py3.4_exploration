@@ -91,6 +91,65 @@ current size of the heap.
   You will notice that an empty binary heap has a single zero as the first element
 of heapList and that this zero is not used, but is there so that a simple
 integer can be used in later methods.
+
+
+Insert method:
+--------------
+
+  The next method we will implement in 'insert.'
+
+  The easiest, and most efficient, way to add an item to a list is to simply
+append the item to the end of the list. The good news about appending is that
+it guarantees that we will maintain the complete tree property.
+
+  The bad news is that we will very likely violate the heap structure property.
+However, it is possible to write a method that will allow us to regain the heap
+structure property by comparing the newly added items with its parent.
+
+  If the newly added item is less than its parent, then we can swap the item
+with its parent.
+
+  Notice that when we percolate an item up, we are restoring the heap property
+between the newly added item and the parent. We are also perserving the heap
+property for any siblings.
 """
 
+class PriorityQueue:
+    """
+    A priority queue acts like a queue in that you can dequeue and item by
+    removing it from the front. However, in a priority queue the logical order
+    of items inside the queue is determined by their priority. The highest priority
+    items are at the front of the queue and the lowest priority items are at the
+    back.
+    """
 
+    def __init__(self):
+        """
+        You will notice that an empty binary heap has a single zero as the first element
+        of heapList and that this zero is not used, but is there so that a simple
+        integer can be used in later methods.
+        """
+        self.heapList = [0]
+        self.currentSize = 0
+
+    def percUp(self, i):
+        """
+        Compares the newly inserted item with its parent. If the item is less
+        than its parents, then they will be switched.
+        """
+        while i // 2 > 0:
+            if self.heapList[i] < self.heapList[i // 2]:
+                tmp = self.heapList[i // 2]
+                self.heapList[i // 2] = self.heapList[i]
+                self.heapList[i] = tmp
+            i = i // 2
+
+    def insert(self, k):
+        """
+        Inserts a new item to the binary heap
+        """
+        self.heapList.append(k)
+        self.currentSize = self.currentSize + 1
+        self.percUp(self.currentSize)
+
+    
