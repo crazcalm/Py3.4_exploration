@@ -112,6 +112,46 @@ with its parent.
   Notice that when we percolate an item up, we are restoring the heap property
 between the newly added item and the parent. We are also perserving the heap
 property for any siblings.
+
+
+delMin method notes:
+--------------------
+
+  Since the heap property requires that the root of the tree be the smallest
+item in the tree, finding the minimum item is easy. The hard part of delMin
+is restoring full compliance with the heap structure and heap order properties
+after the root has been removed.
+
+  We can restore our heap in two steps.
+
+  1. We will restore the root item by taking the last item in the list and moving
+    it to the root position.
+
+  2. We will restore the heap order property by pushng the new root node down
+    the tree to its proper position.
+
+  In order to maintain the heap order property, all we need to do is swap the
+root with its smallest child less than the root. After the initial swap, we may
+repeat the swapping process with a node and its children until the node is swapped
+into a position on the tree where it is already less than both children.
+
+  The code for percolating a node down the tree is found in the 'percDown' and
+'minChild' methods.
+
+
+buildHeap method:
+-----------------
+
+  To finish our discussion of binary heaps, we will look at a method to build
+an entire heap from a list of keys.
+
+  If we start with an entire list then we can build the whole heap in O(n)
+operations.
+
+  We will start from the middle of the list. Although we start out in the middle
+of the tree and work our way back towards the root, the percDown method enusres that
+the largest child is always down the tree. Beacuse it is a complete binary tree,
+any nodes past the halfway point will be leaves and therefore have no children.
 """
 
 class PriorityQueue:
@@ -152,4 +192,64 @@ class PriorityQueue:
         self.currentSize = self.currentSize + 1
         self.percUp(self.currentSize)
 
-    
+    def percDown(self, i):
+        """
+        Moves the root of the binary heap (or subtree of the heap) down to its
+        proper place in the tree.
+        """
+        while(i * 2) <= self.currentSize:
+            mc = self.minChild(i)
+            if self.heapList[i] > self.heapList[mc]:
+                tmp = self.heapList[i]
+                self.heapList[i] = self.heapList[mc]
+                self.heapList[mc] = tmp
+            i = mc
+
+    def minChild(self, i):
+        """
+        Returns the index of the min Child
+        """
+        if i * 2 + 1 > self.currentSize:
+            return i*2
+        else:
+            if self.heapList[i*2] < self.heapList[i*2+1]:
+                return i*2
+            else:
+                return i*2+1
+
+    def delMin(self):
+        """
+        Returns the smallest item in the Binary Heap
+        """
+        retval = self.heapList[1]
+        self.heapList[1] = self.heapList[currentSize]
+        self.currentSize = self.currentSize - 1
+        self.heapList.pop()
+        self.percDown(1)
+        return retval
+
+    def buildHeap(self, alist):
+        """
+        Builds a Binary Heap from a list
+        """
+        i = len(alist) // 2
+        self.currentSize = len(alist)
+        self.heapList = [0] + alist[:]
+        while (i>0):
+            self.percDown(i)
+            i = i - 1
+
+    def isEmpty(self):
+        return self.currentSize == 0
+
+if __name__ == "__main__":
+    test = [5,7,3,11]
+    test2 = [9,6,5,2,3]
+
+    bh = BinaryHeap()
+    for x in test:
+        bh.insert(x)
+
+    while not bh.isEmpty():
+        print(bh.delMin())
+
