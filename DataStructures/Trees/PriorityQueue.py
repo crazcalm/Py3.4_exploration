@@ -154,7 +154,7 @@ the largest child is always down the tree. Beacuse it is a complete binary tree,
 any nodes past the halfway point will be leaves and therefore have no children.
 """
 
-class PriorityQueue:
+class BinaryHeap:
     """
     A priority queue acts like a queue in that you can dequeue and item by
     removing it from the front. However, in a priority queue the logical order
@@ -222,7 +222,7 @@ class PriorityQueue:
         Returns the smallest item in the Binary Heap
         """
         retval = self.heapList[1]
-        self.heapList[1] = self.heapList[currentSize]
+        self.heapList[1] = self.heapList[self.currentSize]
         self.currentSize = self.currentSize - 1
         self.heapList.pop()
         self.percDown(1)
