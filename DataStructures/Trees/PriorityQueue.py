@@ -246,10 +246,18 @@ if __name__ == "__main__":
     test = [5,7,3,11]
     test2 = [9,6,5,2,3]
 
+    print("Binary heap test 1:\n\n")
     bh = BinaryHeap()
     for x in test:
         bh.insert(x)
 
     while not bh.isEmpty():
         print(bh.delMin())
+
+    print("Binary heap test 2: \n\n")
+    bh2 = BinaryHeap()
+    bh2.buildHeap(test2)
+
+    while not bh2.isEmpty():
+        print(bh2.delMin())
 
