@@ -82,6 +82,43 @@ method defined in the BinarySearch tree class that takes the root as a parameter
 
   In the case where the tree is empty or we want to delete the key at the root
 of the tree, we must take special action.
+
+
+Tree Node Class:
+----------------
+
+  The TreeNode class provides many helper functions that make the work done in
+the BinarySearchTree class methods much easier.
+
+  Many of these helper functions classify a node according to its own position
+as a child, (left or right) and the kind of children the node has.
+
+  One big difference between the TreeNode and the BinarySearchTree class is
+that we explicitly keep track of the parent as an attribute for the del operator.
+
+  Another interesting aspect of the implementation of TreeNode is that we use
+Python's optional paremeters. Optional parameters make it easy for us to create
+a TreeNode under several different circumstances.
+
+  Now that we have the BinarySearchTree shell and the TreeNode it is time to
+write the put method that will allow us to build our binary search tree.
+
+  The put method is a method of the BinarySearchTree class. This method will
+check to see if the tree already has a root. If there is not a root then put
+will create a new TreeNode and install it as the root of the tree. If a root
+node is already in place then put calls the private, recursive, helper function
+_put to search the tree according to the following algorithm.
+
+  1. Starting at the root of the tree, search the binary tree comparing the
+    new key to the key of the current node. If the new key is less than the
+    current node, search the left subtree. If the new key is greater than the
+    current node, search the right subtree.
+
+  2. When there is no left (or right) child to search, we have found the
+    position in the tree where the new node should be installed.
+
+  3. To add a node to the tree, create a new TreeNode object and insert the
+    object at the point discovered by the previous step.
 """
 
 class BinarySearchTree:
