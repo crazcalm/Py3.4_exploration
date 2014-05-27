@@ -103,6 +103,10 @@ a TreeNode under several different circumstances.
   Now that we have the BinarySearchTree shell and the TreeNode it is time to
 write the put method that will allow us to build our binary search tree.
 
+
+put and _put methods:
+---------------------
+
   The put method is a method of the BinarySearchTree class. This method will
 check to see if the tree already has a root. If there is not a root then put
 will create a new TreeNode and install it as the root of the tree. If a root
@@ -119,6 +123,33 @@ _put to search the tree according to the following algorithm.
 
   3. To add a node to the tree, create a new TreeNode object and insert the
     object at the point discovered by the previous step.
+
+
+get and _get methods:
+---------------------
+
+  The get method is even easier than the put method becuse it simply searches
+the tree recursively until it gets to a non-matching leaf node or finds a
+matching key. When a matching key is found, the value stored in te payload of
+the node is returned.
+
+
+delete method:
+--------------
+
+  Finally, we turn our attention to the most challenging method in the binary
+search tree, the deletion of a key.
+
+  The first task is to find the node to delete by searching the tree. If the
+tree has more than one node we search using the _get method to find the TreeNode
+that needs to be removed.
+
+  If the tree only has a single node, that means we are removing the root of
+the tree, but we still must check to make sure the key of the root matches the
+key of the root matches the key that is to be deleted.
+
+  In eithe case, if the key is not found the del operator raises an error.
+
 """
 
 class TreeNode:
@@ -174,6 +205,23 @@ class BinarySearchTree:
     def length(self):
         return self.size
 
+    def delete(self, key):
+        if self.size > 1:
+            nodeToRemove = self._get(key, self.root)
+            if nodeToRemove:
+                self.remove(nodeToRemove)
+                self.size = self.size - 1
+
+            else:
+                raise KeyError('Error, key not in tree')
+
+        elif self.size == 1 and self.root.key == key:
+            self.root = None
+            self.size = self.size - 1
+
+        else:
+            raise KeyError('Error, Key not in tree')
+
     def put(self, key, val):
         if self.root:
             self._put(key, val, self, val)
@@ -228,6 +276,9 @@ class BinarySearchTree:
 
     def __getitem__(self, key):
         return self.get(key)
+
+    def __delitem__(self, key):
+        self.delete(key)
 
     def __contains__(self, key):
         if self._get(key, self.root):
