@@ -196,6 +196,45 @@ class BinarySearchTree:
                 currentNode.rightChild = TreeNode(key, value,
                                                 parent = currentNode)
 
+    def get(self, key):
+        if self.root:
+            res = self._get(key, self.root)
+            if res:
+                return res.payload
+            else:
+                return None
+
+        else:
+            return None
+
+    def _get(self, key, currentNode):
+        if not currentNode:
+            return None
+
+        elif currentNode.key == key:
+            return currentNode
+
+        elif key < currentNode.key:
+            return _get(key, currentNode.leftChild)
+
+        elif key > currentNode.key:
+            return _get(key, currentNode.rightChild)
+
+        else: # All possible cases are listed above
+            return None
+
+    def __setitem__(self, k, v):
+        self.put(k,v)
+
+    def __getitem__(self, key):
+        return self.get(key)
+
+    def __contains__(self, key):
+        if self._get(key, self.root):
+            return True
+        else:
+            return False
+
     def __len__(self):
         return self.size
 
