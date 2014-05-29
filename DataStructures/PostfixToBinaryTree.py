@@ -129,6 +129,8 @@ def recursiveHelper(tokens, stack):
             tree.leftChild = subtree2
 
             # debugging
+            print("Below is the rebuilding of the expression from the binary"\
+                    + "tree\n\n")
             print(printexp(tree))
 
             # put tree in stack
@@ -139,8 +141,8 @@ def recursiveHelper(tokens, stack):
 
             return recursiveHelper(tokens, stack)
 
-    print("done?")
-    print(stack.size())
+    #print("done?")
+    #print(stack.size())
     return stack.pop()
 
 

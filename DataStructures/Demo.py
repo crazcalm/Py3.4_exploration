@@ -10,11 +10,29 @@ Needs to demo:
 2. Problem solver
 """
 
-from EquationGenerator import main
-from testing import main2
-def demo():
+from Stack.stack import Stack
+from Trees.NodesAndReferences import BinaryTree
+from BuildParseTree import printexp, inorder, evaluate
+from InfixToPostfix import infixToPostfix
+from PostfixToBinaryTree import convertToBinaryTree
+import EquationGenerator
+import string
 
-    main2(main())
+def demo():
+    """
+    This function will demo the eqaution generator and solver.
+    """
+    equation = EquationGenerator.main()
+
+    print("\n\nEquation: ", equation, "\n\n")
+
+    postfix_version = infixToPostfix(equation)
+
+    print("Postfix version of equation: ", postfix_version, "\n\n")
+
+    equation_tree = convertToBinaryTree(postfix_version)
+
+    print("Solved equation: ", evaluate(equation_tree), '\n\n')
 
 if __name__ == "__main__":
     demo()
