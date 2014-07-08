@@ -192,6 +192,15 @@ class UnorderedList:
         else:
             return found
 
+    def insert(self, item, index):
+        current = self.head
+        previous = None
+        count = 0
+        while current != None and count < index:
+            if count == index:
+                tempt = Node(item)
+                
+
     def append(self, item):
         current = self.head
         previous = None
