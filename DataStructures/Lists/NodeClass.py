@@ -158,12 +158,39 @@ class UnorderedList:
             else:
                 previous.setNext(current.getNext())
 
+    def index(self, item):
+        current = self.head
+        count = 0
+        found = False
+        while current != None and not found:
+            if current.getData() == item:
+                found = True
+            else:
+                current = current.getNext()
+                count = count + 1
+
+        if found:
+            return count
+        else:
+            return found
+
 if __name__ == "__main__":
     unordered_list = UnorderedList()
     print("unordered_list.isEmpty():", unordered_list.isEmpty())
     unordered_list.add(10)
+    unordered_list.add(11)
+    unordered_list.add(12)
+    unordered_list.add(13)
     print("unordered_list.add(10)")
+    print("unordered_list.add(11)")
+    print("unordered_list.add(12)")
+    print("unordered_list.add(13)")
     print("unordered_list.length():", unordered_list.length())
+    print("unordered_list.index(10):", unordered_list.index(10))
+    print("unordered_list.index(11):", unordered_list.index(11))
+    print("unordered_list.index(12):", unordered_list.index(12))
+    print("unordered_list.index(13):", unordered_list.index(13))
+    print("unordered_list.index(14):", unordered_list.index(14))
     print("unordered_list.search(10):", unordered_list.search(10))
     print("unordered_list.search(1):", unordered_list.search(1))
     print("unordered_list.remove(10):", unordered_list.remove(10))
