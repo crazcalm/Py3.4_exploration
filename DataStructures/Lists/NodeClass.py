@@ -158,6 +158,24 @@ class UnorderedList:
             else:
                 previous.setNext(current.getNext())
 
+    def pop(self, index = 0):
+        current = self.head
+        previous = None
+        count = 0
+        while count < index:
+            previous = current
+            current = current.getNext()
+            count = count + 1
+
+        if previous == None:
+            pop = current.getData()
+            self.head = current.getNext()
+            return pop
+        else:
+            pop = current.getData()
+            previous.setNext(current.getNext())
+            return pop
+
     def index(self, item):
         current = self.head
         count = 0
@@ -191,6 +209,9 @@ if __name__ == "__main__":
     print("unordered_list.index(12):", unordered_list.index(12))
     print("unordered_list.index(13):", unordered_list.index(13))
     print("unordered_list.index(14):", unordered_list.index(14))
+    print("unordered_list.pop(0):", unordered_list.pop(0))
+    print("unordered_list.pop():", unordered_list.pop())
+    print("unordered_list.pop(1):", unordered_list.pop(1))
     print("unordered_list.search(10):", unordered_list.search(10))
     print("unordered_list.search(1):", unordered_list.search(1))
     print("unordered_list.remove(10):", unordered_list.remove(10))
