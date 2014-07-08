@@ -132,7 +132,7 @@ class UnorderedList:
 
     def search(self, item):
         current = self.head
-        fount = False
+        found = False
         while current != None and not found:
             if current.getData() == item:
                 found = True
@@ -156,3 +156,14 @@ class UnorderedList:
             self.head = current.getNext()
         else:
             previous.setNext(current.getNext())
+
+if __name__ == "__main__":
+    unordered_list = UnorderedList()
+    print("unordered_list.isEmpty():", unordered_list.isEmpty())
+    unordered_list.add(10)
+    print("unordered_list.add(10)")
+    print("unordered_list.length():", unordered_list.length())
+    print("unordered_list.search(10):", unordered_list.search(10))
+    print("unordered_list.search(1):", unordered_list.search(1))
+    print("unordered_list.remove(10):", unordered_list.remove(10))
+    print("unordered_list.length():", unordered_list.length())
