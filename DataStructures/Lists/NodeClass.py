@@ -145,17 +145,18 @@ class UnorderedList:
         current = self.head
         previous = None
         found = False
-        while not found:
+        while not found and current != None:
             if current.getData() == item:
                 found = True
             else:
                 previous = current
                 current = current.getNext()
 
-        if previous == None:
-            self.head = current.getNext()
-        else:
-            previous.setNext(current.getNext())
+        if found:
+            if previous == None:
+                self.head = current.getNext()
+            else:
+                previous.setNext(current.getNext())
 
 if __name__ == "__main__":
     unordered_list = UnorderedList()
@@ -167,3 +168,4 @@ if __name__ == "__main__":
     print("unordered_list.search(1):", unordered_list.search(1))
     print("unordered_list.remove(10):", unordered_list.remove(10))
     print("unordered_list.length():", unordered_list.length())
+    print("unordered_list.remove(2):", unordered_list.remove(2))
