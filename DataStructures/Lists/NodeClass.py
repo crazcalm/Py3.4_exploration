@@ -192,17 +192,36 @@ class UnorderedList:
         else:
             return found
 
+    def append(self, item):
+        current = self.head
+        previous = None
+        while current != None:
+            previous = current
+            current = current.getNext()
+
+        if previous == None:
+            tempt = Node(item)
+            tempt.setNext(self.head)
+            self.head = tempt
+        else:
+            tempt = Node(item)
+            previous.setNext(tempt)
+
 if __name__ == "__main__":
     unordered_list = UnorderedList()
     print("unordered_list.isEmpty():", unordered_list.isEmpty())
+    unordered_list.append(9)
     unordered_list.add(10)
     unordered_list.add(11)
     unordered_list.add(12)
     unordered_list.add(13)
+    unordered_list.append(14)
+    print("unordered_list.append(9)")
     print("unordered_list.add(10)")
     print("unordered_list.add(11)")
     print("unordered_list.add(12)")
     print("unordered_list.add(13)")
+    print("unordered_list.append(14)")
     print("unordered_list.length():", unordered_list.length())
     print("unordered_list.index(10):", unordered_list.index(10))
     print("unordered_list.index(11):", unordered_list.index(11))
