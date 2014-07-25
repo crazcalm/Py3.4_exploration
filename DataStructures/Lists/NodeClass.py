@@ -192,14 +192,26 @@ class UnorderedList:
         else:
             return found
 
-    def insert(self, item, index):
+    def insert(self, index, item):
         current = self.head
         previous = None
         count = 0
         while current != None and count < index:
-            if count == index:
-                tempt = Node(item)
-                
+            previous = current
+            current  = current.getNext()
+            count = count + 1
+
+        if previous == None:
+            tempt = Node(item)
+            tempt.setNext(self.head)
+            self.head = tempt
+
+        else:
+            tempt = Node(item)
+            previous.setNext(tempt)
+
+            if current !=  None:
+                tempt.setNext(current)
 
     def append(self, item):
         current = self.head
@@ -245,3 +257,10 @@ if __name__ == "__main__":
     print("unordered_list.remove(10):", unordered_list.remove(10))
     print("unordered_list.length():", unordered_list.length())
     print("unordered_list.remove(2):", unordered_list.remove(2))
+    print("unordered_list.insert(0,15)", unordered_list.insert(0,15))
+    print("unordered_list.search(15)", unordered_list.search(15))
+    print("unordered_list.insert(1,20)", unordered_list.insert(1, 20))
+    print("unordered_list.search(20)", unordered_list.search(20))
+    print("unordered_list.length()", unordered_list.length())
+    print("unordered_list.pop(1)", unordered_list.pop(1))
+    print("unordered_list.pop(0)", unordered_list.pop(0))
