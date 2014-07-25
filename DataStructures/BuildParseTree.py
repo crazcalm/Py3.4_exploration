@@ -179,8 +179,8 @@ if __name__ == "__main__":
     l.insertRight(5)
     x.insertRight(7)
 
-    #preorder(x)
-    #postorder(x)
+    preorder(x)
+    postorder(x)
     inorder(x)
 
     print(evaluate(x))
