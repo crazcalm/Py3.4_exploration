@@ -5,7 +5,8 @@ class FeetToMeters(Frame):
     def __init__(self, master):
         super().__init__(master)
 
-        print(dir(self))
+        master.title("Feet to Meters")
+
         self.mainframe = ttk.Frame(self, padding="3 3 12 12")
         self.mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
         self.mainframe.rowconfigure(0, weight=1)
@@ -33,11 +34,12 @@ class FeetToMeters(Frame):
             child.grid_configure(padx=5, pady=5)
 
         self.feet_entry.focus()
-        self.bind('<Return>', self.calculate)
+        master.bind('<Return>', self.calculate)
 
         self.pack()
-    def calculate(self):
+    def calculate(self, *args):
         try:
+            print(args)
             value = float(self.feet.get())
             self.meters.set((0.3048 * value * 10000.0 + 0.5)/10000.0)
         except ValueError:
