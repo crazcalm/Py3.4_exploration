@@ -18,6 +18,16 @@ def generic_msg(title='Alert', text='Not ready yet.\nSorry'):
 # TODO Move constants to its own file
 SENTENCE1 = "I can write things to the screen!!!"
 SENTENCE2 = "This is kind of cool!!!!!!!"
+HEIGHT = 800
+WIDTH = 600
+
+
+class ScrollBarComponent(Scrollbar):
+    def __init__(self, parent):
+        super().__init__(parent)
+
+    def set_options(self, side, fill):
+        self.pack(side=side, fill=fill)
 
 
 # TODO Move each class to its own file.
@@ -25,10 +35,17 @@ class TextSection(Text):
     """
     This widget controls the Text box
     """
-    def __init__(self, master_frame, state=NORMAL):
-        super().__init__(master_frame.root, state=state)
+    def __init__(self, master_frame, state=NORMAL,
+                 yscrollcommand=None,
+                 height=50, width=100):
+        super().__init__(master_frame.root, state=state,
+                         yscrollcommand=yscrollcommand.set,
+                         height=height,
+                         width=width)
         self.parent = master_frame.root
         self.master = master_frame
+        self.y_scrollbar = yscrollcommand
+        self.y_scrollbar.config(command=self.yview)
 
         # Writes Text to the screen
         self.insert_text(SENTENCE1)
@@ -36,6 +53,12 @@ class TextSection(Text):
 
         # Render to Screen
         self.pack()
+
+        # Testing things out
+        testing = self.dump(INSERT)
+        print("Text.dump:", testing)
+
+        self.clear_text()
 
     def insert_text(self, text):
         """
@@ -48,11 +71,12 @@ class TextSection(Text):
 
     def clear_text(self):
         """
-        Clears the text from the text box
+        Clears the text from the index '1.0' to the 'END' of
+        the text box
 
         :return: None
         """
-        pass
+        self.delete("1.0", END)
 
 
 class NavBar(Menu):
@@ -102,11 +126,12 @@ class NavBar(Menu):
     def close(self):
         self.parent.quit()
 
+
 class Gui(Frame):
     """
     This widget is the main frame of the program. The parent frame.
     """
-    def __init__(self, root, width=600, height=800):
+    def __init__(self, root, width=WIDTH, height=HEIGHT):
         """
         Setting the defaults for the frame
 
@@ -129,6 +154,10 @@ class Gui(Frame):
 
         # packs the Gui
         self.pack()
+
+        # Testing things out
+        print("""height: {0},
+        width: {1}""".format(self.winfo_height(), self.winfo_width()))
 
     def set_title(self, title):
         """
@@ -155,12 +184,20 @@ class Gui(Frame):
 
         :return: None
         """
-        self.text_section = TextSection(self)
+        y_scrollbar = ScrollBarComponent(self.root)
+        y_scrollbar.set_options(RIGHT, Y)
+        self.text_section = TextSection(self, yscrollcommand=y_scrollbar)
 
     def open_file(self):
         test = filedialog.askopenfile()
         generic_msg(text=test.name)
         print(test)
+        self.text_section.clear_text()
+        with open(test.name, "r") as f:
+            text = f.read()
+            self.text_section.insert_text(text)
+
+        self.text_section.pack()
 
 if __name__ == '__main__':
     root = Tk()
