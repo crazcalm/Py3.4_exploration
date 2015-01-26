@@ -37,7 +37,7 @@ class TextSection(Text):
     """
     def __init__(self, master_frame, state=NORMAL,
                  yscrollcommand=None,
-                 height=50, width=100):
+                 height=80, width=100):
         super().__init__(master_frame.root, state=state,
                          yscrollcommand=yscrollcommand.set,
                          height=height,
@@ -52,7 +52,7 @@ class TextSection(Text):
         self.insert_text(SENTENCE2)
 
         # Render to Screen
-        self.pack()
+        self.pack(fill=BOTH)
 
         # Testing things out
         testing = self.dump(INSERT)
