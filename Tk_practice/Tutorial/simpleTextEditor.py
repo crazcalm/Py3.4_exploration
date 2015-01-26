@@ -55,7 +55,7 @@ class TextSection(Text):
         self.pack(fill=BOTH)
 
         # Testing things out
-        testing = self.dump(INSERT)
+        testing = self.get("1.0", END)
         print("Text.dump:", testing)
 
         self.clear_text()
@@ -77,6 +77,9 @@ class TextSection(Text):
         :return: None
         """
         self.delete("1.0", END)
+
+    def get_all_text(self):
+        return self.get("1.0", END)
 
 
 class NavBar(Menu):
@@ -119,7 +122,7 @@ class NavBar(Menu):
         return(
             ('Open', self.master.open_file),
             ('Save', generic_msg),
-            ('Save as', generic_msg),
+            ('Save as', self.master.save_new_file),
             ('Close', self.close),
         )
 
@@ -198,6 +201,20 @@ class Gui(Frame):
             self.text_section.insert_text(text)
 
         self.text_section.pack()
+
+    def save_new_file(self):
+        file_name = filedialog.asksaveasfilename()
+        print("asksaveasfilename:", file_name)
+
+        # Cancelling the process results in an empty string
+        if file_name != "":
+            with open(file_name, "w") as f:
+                text = self.text_section.get_all_text()
+                f.write(text)
+
+    def save_existing_file(self):
+        # TODO look up the mode that rewrite the file each time
+        file_name = filedialog.asksaveasfile(mode="???")
 
 if __name__ == '__main__':
     root = Tk()
