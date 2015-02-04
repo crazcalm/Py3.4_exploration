@@ -40,6 +40,7 @@ class NavBar(Menu):
 
     def get_file_menu_data(self):
         return(
+            ('New', self.master.new_file),
             ('Open', self.master.open_file),
             ('Save', self.master.save_existing_file),
             ('Save as', self.master.save_new_file),

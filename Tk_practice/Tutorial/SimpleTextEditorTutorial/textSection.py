@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter.ttk import *
+from constants import SENTENCE1, SENTENCE2
 
 
 class TextSection(Text):

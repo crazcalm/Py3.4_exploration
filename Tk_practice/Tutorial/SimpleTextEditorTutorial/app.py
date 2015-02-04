@@ -1,10 +1,11 @@
 from tkinter import *
 from tkinter.ttk import *
+from tkinter import filedialog
 from tkComponents import ScrollBarComponent
-from constants import HEIGHT, WIDTH, SENTENCE1, SENTENCE2
+from constants import HEIGHT, WIDTH
 from textSection import TextSection
 from navBarSection import NavBar
-from utilities import parse_filename
+from utilities import parse_filename, generic_msg
 
 
 class Gui(Frame):
@@ -26,7 +27,7 @@ class Gui(Frame):
         self.text_section = None
 
         # Properties
-        self.current_file_name = None
+        self.current_file_path = None
 
         # Gives the Gui a Title
         self.set_title()
@@ -46,7 +47,7 @@ class Gui(Frame):
         """
         Sets the title for the GUI
 
-        :param title: str
+        :param file_name: str
         :return: None
         """
         title = "Simple Text Editor" + file_name
@@ -73,45 +74,59 @@ class Gui(Frame):
         self.text_section = TextSection(self, yscrollcommand=y_scrollbar)
 
     def open_file(self):
-        test = filedialog.askopenfile()
-        generic_msg(text=test.name)
-        print(test)
-        self.text_section.clear_text()
-        with open(test.name, "r") as f:
-            text = f.read()
-            self.text_section.insert_text(text)
+        file_path = filedialog.askopenfile()
 
-        self.text_section.pack()
+        # User selects a file
+        if file_path:
+            self.text_section.clear_text()
+            with open(file_path.name, "r") as f:
+                text = f.read()
+                self.text_section.insert_text(text)
 
-        # Save the name of the file
-        self.current_file_name = test.name
+            self.text_section.pack()
 
-        # Alter the GUI Title
-        file_name = parse_filename(test.name)
-        self.set_title(file_name=": " + file_name)
+            # Save the name of the file
+            self.current_file_path = file_path.name
+
+            # Alter the GUI Title
+            file_name = parse_filename(file_path.name)
+            self.set_title(file_name=": " + file_name)
+
+        # User cancels the process
+        else:
+            pass
 
     def save_new_file(self):
-        file_name = filedialog.asksaveasfilename()
-        print("asksaveasfilename:", file_name)
+        file_path = filedialog.asksaveasfilename()
 
         # Cancelling the process results in an empty string
-        if file_name != "":
-            with open(file_name, "w") as f:
+        if file_path:
+            with open(file_path, "w") as f:
                 text = self.text_section.get_all_text()
                 f.write(text)
 
-        # Save the name of the file
-        self.current_file_name = file_name
+            # Save the name of the file
+            self.current_file_path = file_path
 
-        # Alter the GUI Title
-        self.set_title(file_name=": " + file_name)
+            # Alter the GUI Title
+            file_name = parse_filename(file_path)
+            self.set_title(file_name=": " + file_name)
 
     def save_existing_file(self):
-        file_name = self.current_file_name
+        file_path = self.current_file_path
 
-        with open(file_name, "w") as f:
-            text = self.text_section.get_all_text()
-            f.write(text)
+        if file_path:
+            with open(file_path, "w") as f:
+                text = self.text_section.get_all_text()
+                f.write(text)
+
+        else:
+            generic_msg(text="Cannot Save this file. Try Save As")
+
+    def new_file(self):
+        self.current_file_path = None
+        self.text_section.clear_text()
+        self.set_title()
 
 if __name__ == '__main__':
     root = Tk()
