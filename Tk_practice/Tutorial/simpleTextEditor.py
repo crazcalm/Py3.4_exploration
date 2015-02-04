@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import tkinter.messagebox as msg
 from tkinter import filedialog
+import os
 
 
 # TODO Move untilty function to its own file
@@ -14,6 +15,10 @@ def generic_msg(title='Alert', text='Not ready yet.\nSorry'):
     :return: None
     """
     msg.showinfo(title, text)
+
+
+def parse_filename(path):
+    return path.split(os.sep)[-1]
 
 # TODO Move constants to its own file
 SENTENCE1 = "I can write things to the screen!!!"
@@ -121,7 +126,7 @@ class NavBar(Menu):
     def get_file_menu_data(self):
         return(
             ('Open', self.master.open_file),
-            ('Save', generic_msg),
+            ('Save', self.master.save_existing_file),
             ('Save as', self.master.save_new_file),
             ('Close', self.close),
         )
@@ -147,9 +152,12 @@ class Gui(Frame):
         self.root = root
         self.nav_bar = None
         self.text_section = None
+        
+        # Properties
+        self.current_file_name = None
 
         # Gives the Gui a Title
-        self.set_title("Simple Text Editor")
+        self.set_title()
 
         # Create Gui Parts
         self.create_nav_bar()
@@ -162,13 +170,14 @@ class Gui(Frame):
         print("""height: {0},
         width: {1}""".format(self.winfo_height(), self.winfo_width()))
 
-    def set_title(self, title):
+    def set_title(self, file_name=''):
         """
         Sets the title for the GUI
 
         :param title: str
         :return: None
         """
+        title = "Simple Text Editor" + file_name
         self.root.title(title)
 
     def create_nav_bar(self):
@@ -202,6 +211,13 @@ class Gui(Frame):
 
         self.text_section.pack()
 
+        # Save the name of the file
+        self.current_file_name = test.name
+
+        # Alter the GUI Title
+        file_name = parse_filename(test.name)
+        self.set_title(file_name=": " + file_name)
+
     def save_new_file(self):
         file_name = filedialog.asksaveasfilename()
         print("asksaveasfilename:", file_name)
@@ -212,9 +228,18 @@ class Gui(Frame):
                 text = self.text_section.get_all_text()
                 f.write(text)
 
+        # Save the name of the file
+        self.current_file_name = file_name
+
+        # Alter the GUI Title
+        self.set_title(file_name=": " + file_name)
+
     def save_existing_file(self):
-        # TODO look up the mode that rewrite the file each time
-        file_name = filedialog.asksaveasfile(mode="???")
+        file_name = self.current_file_name
+        
+        with open(file_name, "w") as f:
+            text = self.text_section.get_all_text()
+            f.write(text)
 
 if __name__ == '__main__':
     root = Tk()
