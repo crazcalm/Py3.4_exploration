@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter import ttk
+from tkinter.ttk import *
 import tkinter.messagebox as msg
 from tkinter import filedialog
 import os
