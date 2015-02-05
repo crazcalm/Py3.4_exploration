@@ -39,10 +39,6 @@ class Gui(Frame):
         # packs the Gui
         self.pack()
 
-        # Testing things out
-        print("""height: {0},
-        width: {1}""".format(self.winfo_height(), self.winfo_width()))
-
     def set_title(self, file_name=''):
         """
         Sets the title for the GUI

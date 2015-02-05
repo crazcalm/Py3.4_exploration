@@ -14,4 +14,11 @@ def generic_msg(title='Alert', text='Not ready yet.\nSorry'):
 
 
 def parse_filename(path):
+    """
+    Splits the path by the os.sep and returns the last name in the
+    path
+
+    :param path: str
+    :return: str
+    """
     return path.split(os.sep)[-1]

@@ -1,6 +1,5 @@
 from tkinter import *
 from tkinter.ttk import *
-from constants import SENTENCE1, SENTENCE2
 
 
 class TextSection(Text):
@@ -12,24 +11,22 @@ class TextSection(Text):
                  height=80, width=100):
         super().__init__(master_frame.root, state=state,
                          yscrollcommand=yscrollcommand.set,
-                         height=height,
-                         width=width)
+                         height=height, width=width)
+
+        # Reference to root
         self.parent = master_frame.root
+
+        # Reference to the Main GUI
         self.master = master_frame
+
+        # Setting the Scrollbar
         self.y_scrollbar = yscrollcommand
         self.y_scrollbar.config(command=self.yview)
-
-        # Writes Text to the screen
-        self.insert_text(SENTENCE1)
-        self.insert_text(SENTENCE2)
 
         # Render to Screen
         self.pack(fill=BOTH)
 
-        # Testing things out
-        testing = self.get("1.0", END)
-        print("Text.dump:", testing)
-
+        # Ensures that the textbox is cleared
         self.clear_text()
 
     def insert_text(self, text):
@@ -51,4 +48,9 @@ class TextSection(Text):
         self.delete("1.0", END)
 
     def get_all_text(self):
+        """
+        Returns all of the text within the Textbox
+
+        :return: str
+        """
         return self.get("1.0", END)
